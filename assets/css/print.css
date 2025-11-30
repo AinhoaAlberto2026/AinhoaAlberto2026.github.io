@@ -1,0 +1,88 @@
+/* =======================================================
+   REGLAS CSS PARA IMPRESIÓN (print.css)
+   ======================================================= */
+
+/* 1. Ocultar Elementos Irrelevantes */
+@page {
+    /* Elimina el header y footer de página si el navegador los añade */
+    margin: 1cm;
+}
+
+header,
+nav,
+.menu-toggle, /* Botón de hamburguesa */
+.hero,       /* Imagen principal de fondo */
+.btn,        /* Botones de acción */
+#rsvp,       /* <--- Oculta TODA la sección de Confirmación de Asistencia */
+.rsvp-form,  /* El formulario completo no es imprimible */
+.form-note,
+.story-image, /* <--- Oculta el contenedor de la imagen de Nuestra Historia */
+.event-block img, /* <--- Oculta todas las imágenes de eventos */
+footer,
+.dress-code,
+#contacto p a[href^="tel:"]
+{
+    display: none !important;
+}
+
+
+/* 2. Formato de Texto y Enlaces */
+
+body {
+    background-color: #fff !important; /* Fondo blanco para ahorrar tinta */
+    color: #000 !important;
+    font-size: 12pt; /* Tamaño de letra adecuado para impresión */
+}
+
+/* 3. Mostrar Elementos Esenciales */
+
+/* Aseguramos que el contenido principal sea visible */
+section {
+    page-break-after: always; /* Cada sección en una página nueva (opcional, se puede quitar) */
+    padding: 20px 0;
+}
+
+/* Volvemos a mostrar la información de contacto sin los enlaces de teléfono/email */
+#contacto p strong {
+    display: block;
+}
+#contacto p {
+    text-align: left;
+}
+
+
+/* 4. Estilos para Imágenes y Mapas */
+
+/* Las imágenes se imprimen en escala de grises y sin bordes */
+/* Aunque las hemos ocultado, esta regla es buena si decides no ocultar alguna imagen en el futuro */
+img {
+    filter: grayscale(100%);
+    box-shadow: none !important;
+    max-width: 100%;
+}
+
+/* Hacemos que la sección del evento no tenga fondo gris */
+#evento {
+    background-color: #fff !important;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+.event-details {
+    display: block !important; /* Para que los bloques de evento se apilen en vertical */
+}
+
+.event-block {
+    background-color: #fff !important;
+    border: 1px dashed #999;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.event-block a[href] {
+    /* Muestra la URL completa del enlace del mapa para que el invitado la pueda escribir */
+    text-decoration: underline;
+    color: #333;
+    content: " (URL: " attr(href) ")";
+}
